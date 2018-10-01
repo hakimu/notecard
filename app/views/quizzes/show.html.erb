@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @quiz.name %>
+</p>
+
+<p>There are <%= @notes.count %> notes</p>
+
+<h3>Notes: </h3>
+
+<p>
+  <% @notes.each do |note| %>
+    <%= note.method %><br>
+    <%= note.term %>
+  <% end %>
+</p>
+
+<!-- <p>
+  <#% if @notes.method.present? %>
+    <strong>Method:</strong>
+    <#%= @notes.method %>
+  <#% end %>
+</p>
+
+<p>
+  <#% if @note.term.present? %>
+    <strong>Term:</strong>
+    <#%= @note.term %>
+  <#% end %>
+</p> -->
+
+<%= link_to 'Edit', edit_quiz_path(@quiz) %> |
+<%= link_to 'Back', quizzes_path %>
+

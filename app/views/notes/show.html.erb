@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <% if @note.method.present? %>
+    <strong>Method:</strong>
+    <%= @note.method %>
+  <% end %>
+</p>
+
+<p>
+  <% if @note.term.present? %>
+    <strong>Term:</strong>
+    <%= @note.term %>
+  <% end %>
+</p>
+
+<p>
+  <% if @note.code_sample.present? %>
+    <strong>Code sample:</strong>
+    <%= @note.code_sample %>
+  <% end %>
+</p>
+
+<p>
+  <% if @note.definition.present? %>
+    <strong>Definition:</strong>
+    <%= @note.definition %>
+  <% end %>
+</p>
+
+<p>
+  <% if @note.language.present? %>
+    <strong>Language:</strong>
+    <%= @note.language %>
+  <% end %>
+</p>
+
+<p>
+  <% if @note.concept.present? %>
+    <strong>Concept:</strong>
+    <%= @note.concept %>
+  <% end %>
+</p>
+
+<p>
+  <% if @note.difficulty.present? %>
+    <strong>Difficulty:</strong>
+    <%= @note.difficulty %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>
