@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :confirm_login
-  before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :set_note, :confirm_owner, only: [:show, :edit, :update, :destroy]
 
   # GET /notes
   # GET /notes.json
@@ -78,6 +78,12 @@ class NotesController < ApplicationController
     def confirm_login
     unless current_user
       redirect_to root_path, alert: "You must log in to manage a to do list."
+    end
+
+    def confirm_owner
+      if @note && current_user != @note.user
+        redirect_to notes_path, alert: "You don't have permission to access that note."
+      end
     end
   end
 end

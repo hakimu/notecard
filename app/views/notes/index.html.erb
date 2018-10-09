@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
 
 <h1>Notes</h1>
 
@@ -19,13 +20,27 @@
   <tbody>
     <% @notes.each do |note| %>
       <tr>
-        <td><%= note.method %></td>
-        <td><%= note.term %></td>
-        <td><%= note.code_sample %></td>
-        <td><%= note.definition %></td>
-        <td><%= note.language %></td>
-        <td><%= note.concept %></td>
-        <td><%= note.difficulty %></td>
+        <% if note.method.present? %>
+         <td><%= note.method %></td>
+        <% end %>
+        <% if note.term.present? %>
+          <td><%= note.term %></td>
+        <% end %>
+        <% if note.code_sample.present? %>
+          <td><%= note.code_sample %></td>
+        <% end %>
+        <% if note.definition.present? %>
+          <td><%= note.definition %></td>
+        <% end %>
+        <% if note.language.present? %>
+          <td><%= note.language %></td>
+        <% end %>
+        <% if note.concept.present? %>
+          <td><%= note.concept %></td>
+        <% end %>
+        <% if note.difficulty.present? %>
+          <td><%= note.difficulty %></td>
+        <% end %>
         <td><%= link_to 'Show', note %></td>
         <td><%= link_to 'Edit', edit_note_path(note) %></td>
         <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
