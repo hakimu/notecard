@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Notes:</strong>
+  <% @notes.each do |note| %>
+  <ul>
+    <li><%= note.method %></li>
+  </ul>
+  <% end %>
+</p>
+
+<p>
+  <strong>Quizzes:</strong>
+  <% @quizzes.each do |quiz| %>
+  <ul>
+    <li><%= quiz.name %></li>
+    <% @quizzes.each do |quiz| %>
+      <li><%= quiz.notes %></li>
+    <% end %>
+  </ul>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

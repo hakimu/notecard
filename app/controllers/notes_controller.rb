@@ -1,10 +1,12 @@
 class NotesController < ApplicationController
+  before_action :confirm_login
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    # @notes = Note.all
+    @notes = current_user.notes.all
   end
 
   # GET /notes/1
@@ -24,11 +26,12 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
-    @note = Note.new(note_params)
+    # @note = Note.new(note_params)
+    @note = current_user.notes.build(note_params)
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
@@ -71,4 +74,10 @@ class NotesController < ApplicationController
     def note_params
       params.require(:note).permit(:method, :term, :code_sample, :definition, :language, :concept, :difficulty)
     end
+
+    def confirm_login
+    unless current_user
+      redirect_to root_path, alert: "You must log in to manage a to do list."
+    end
+  end
 end
