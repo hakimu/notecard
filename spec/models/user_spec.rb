@@ -1,42 +1,39 @@
 require 'rails_helper'
 
-# describe User do
-#   it 'has a valid factory' do
-#     expect(FactoryBot.build(:user)).to be_valid
-#   end
-# end
-
 RSpec.describe User, type: :model do
-  it 'valid with a username, email and password' do
-    user = FactoryBot.create(:user)
-    expect(user).to be_valid
+  describe '#create' do
+    context 'when given valid attributes' do
+      it 'creates a valid User with a username, email and password' do
+        user = create(:user)
+        expect(user).to be_valid
+      end
+    end
+    context 'when given INVALID attributes' do
+      it 'is invalid without a username' do
+        user = build(:user, username: nil)
+        user.save
+        expect(user.errors[:username]).to include('can\'t be blank')
+      end
+      it 'is invalid without an email' do
+        user = build(:user, email: nil)
+        user.save
+        expect(user.errors[:email]).to include('can\'t be blank', 'is invalid')
+      end
+			it 'is invalid with a duplicate username' do
+				create(:user, username: 'hakimu')
+				another_user = FactoryBot.build(:user, username: 'hakimu')
+				another_user.valid?
+				expect(another_user.errors[:username]).to include('has already been taken')
+			end
+      it 'is invalid with a duplicate email' do
+        create(:user, email: 'h@example.com')
+        another_user = FactoryBot.build(:user, email: 'h@example.com')
+        another_user.valid?
+        expect(another_user.errors[:email]).to include('has already been taken')
+      end
+    end
   end
 
-  it 'is invalid without a username' do
-    user = FactoryBot.build(:user, username: nil) 
-    user.valid?
-    expect(user.errors[:username]).to include('can\'t be blank')
-  end
-
-  it 'is invalid without an email' do
-    user = FactoryBot.build(:user, email: nil)
-    user.valid?
-    expect(user.errors[:email]).to include('can\'t be blank', 'is invalid')
-  end
-
-  it 'is invalid with a duplicate username' do
-    FactoryBot.create(:user, username: 'hakimu')
-    user = FactoryBot.build(:user, username: 'hakimu')
-    user.valid?
-    expect(user.errors[:username]).to include('has already been taken')
-  end
-
-  it 'is invalid with a duplicate email' do
-    FactoryBot.create(:user, email: 'h@example.com')
-    user = FactoryBot.build(:user, email: 'h@example.com')
-    user.valid?
-    expect(user.errors[:email]).to include('has already been taken')
-  end
   it 'is able to have a note associated with it' do
     user = FactoryBot.create(:user)
     note = user.notes.create(method: 'def', code_sample: 'def test_method end', difficulty: 1)
