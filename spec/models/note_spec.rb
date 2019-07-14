@@ -69,6 +69,14 @@ RSpec.describe Note, type: :model do
         another_note = create(:note, term: 'foo')
         expect(Note.search('foo')).to include(note, another_note)
       end
+      it 'returns the proper notes with multiple notes' do
+        create(:note, method: 'alias')
+        create(:note, method: 'all?')
+        create(:note, term: 'alias a method')
+        random_note = create(:note, term: 'random note')
+        expect(Note.search('al').count).to eq(3) 
+        expect(Note.search('al')).to_not include(random_note)
+      end
     end
   end
 end
