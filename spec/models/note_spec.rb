@@ -2,21 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Note, type: :model do
   before do 
-    # @user = User.create(username: 'hakimu', email: 'h@example.com', password: 'password')
     @user = FactoryBot.create(:user)
     @note = FactoryBot.create(:note)
-    # @user.save
-  end
-
-  it 'test the helper' do
-    expect(test_helper).to eq('bar')
-  end
-
-  it 'works' do
-    puts "user is valid? #{@user.valid?}"
-    note = @user.notes.build(:note)
-    note.save
-    expect(note).to be_valid
   end
 
   it 'is valid when a method is defined' do
@@ -76,6 +63,11 @@ RSpec.describe Note, type: :model do
         expect(Note.search("random")).to be_empty
       end
     end
+    context 'when given a valid search 'do
+      it 'returns the matching "method" or "term" attribute' do
+        note_1 = create(:note)
+        expect(Note.search('foo').to include(note_1, note_2))
+      end
+    end
   end
-
 end
