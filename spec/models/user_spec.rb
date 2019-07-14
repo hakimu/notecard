@@ -51,7 +51,6 @@ RSpec.describe User, type: :model do
 
   it 'is invalid with an invalid email address' do
     user = FactoryBot.build(:user, email: 'h@')
-    # user = User.create(username: 'hakimu', email: 'h@', password: 'password')
     user.valid?
     expect(user.errors.full_messages).to include('Email is invalid')
   end
