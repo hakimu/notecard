@@ -8,6 +8,6 @@ class Note < ApplicationRecord
     message: "must be between 1 and 5"
   }
   scope :search, ->(search_term) {
-    where("LOWER(term) LIKE ?","%#{search_term.downcase}%")
+    where("LOWER(method) LIKE ? OR LOWER(term) LIKE ?","%#{search_term.downcase}%", "%#{search_term.downcase}%")
   }
 end

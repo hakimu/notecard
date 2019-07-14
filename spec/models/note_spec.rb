@@ -65,8 +65,9 @@ RSpec.describe Note, type: :model do
     end
     context 'when given a valid search 'do
       it 'returns the matching "method" or "term" attribute' do
-        note_1 = create(:note)
-        expect(Note.search('foo').to include(note_1, note_2))
+        note = create(:note, method: 'foo')
+        another_note = create(:note, term: 'foo')
+        expect(Note.search('foo')).to include(note, another_note)
       end
     end
   end
