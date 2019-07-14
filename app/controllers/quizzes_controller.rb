@@ -75,3 +75,4 @@ class QuizzesController < ApplicationController
       params.require(:quiz).permit(:name)
     end
 end
+

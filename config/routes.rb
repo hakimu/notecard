@@ -1,4 +1,5 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do                              
+  resources :users
   # get 'sessions/new'
 
   # get 'sessions/destroy'
@@ -8,7 +9,6 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
 
-  resources :users
   resources :quizzes
   resources :notes
   

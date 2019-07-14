@@ -10,10 +10,10 @@ one:
   difficulty: 1
 
 two:
-  method: MyString
+  method: reverse
   term: MyString
-  code_sample: MyText
-  definition: MyText
-  language: MyText
+  code_sample: "foo.reverse"
+  definition: "A method that reverses a string"
+  language: "Ruby"
   concept: MyText
   difficulty: 1

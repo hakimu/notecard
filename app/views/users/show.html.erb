@@ -1,24 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Notes:</strong>
-  <% @notes.each do |note| %>
-  <ul>
-    <li><%= note.method %></li>
-  </ul>
-  <% end %>
+  <strong>Username:</strong>
+  <%= @user.username %>
 </p>
 
 <p>
-  <strong>Quizzes:</strong>
-  <% @quizzes.each do |quiz| %>
-  <ul>
-    <li><%= quiz.name %></li>
-    <% @quizzes.each do |quiz| %>
-      <li><%= quiz.notes %></li>
-    <% end %>
-  </ul>
-  <% end %>
+  <strong>Email:</strong>
+  <%= @user.email %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

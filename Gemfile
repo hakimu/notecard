@@ -37,6 +37,8 @@ gem 'pry'
 
 gem 'webpacker'
 
+gem 'rb-readline'
+
 gem 'awesome_print', require:"ap"
 
 # gem 'newrelic_rpm', :path => "/Users/hakimu/Documents/apps/rails_notecard/notecard/newrelic_rpm-4.6.0.338"
@@ -53,6 +55,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'hirb'
+  gem 'factory_bot_rails','~> 4.10.0'
 end
 
 group :development do
