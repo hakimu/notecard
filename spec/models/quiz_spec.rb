@@ -47,5 +47,18 @@ RSpec.describe Quiz, type: :model do
       quiz.save
       expect(quiz.errors.full_messages).to include('Difficulty must be between 1 and 5')
     end
+    it 'is invalid when the difficulty is not between 1 and 5' do
+      note = create(:note)
+      low_quiz = build(:quiz, difficulty: 0)
+      high_quiz = build(:quiz, difficulty: 6)
+      low_quiz.notes << note
+      high_quiz.notes << note
+      low_quiz.save
+      high_quiz.save
+      expect(low_quiz).to_not be_valid
+      expect(low_quiz.errors.full_messages).to include('Difficulty must be between 1 and 5')
+      expect(high_quiz).to_not be_valid
+      expect(high_quiz.errors.full_messages).to include('Difficulty must be between 1 and 5')
+    end
   end
 end
