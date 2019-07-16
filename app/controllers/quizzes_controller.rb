@@ -10,9 +10,8 @@ class QuizzesController < ApplicationController
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
-    puts params
-    @notes = Quiz.find(params[:id]).notes
-    # puts quiz
+    response = QuizFormatter.new(params[:id]).call 
+    render json: response
   end
 
   # GET /quizzes/new
@@ -67,7 +66,7 @@ class QuizzesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
-      @quiz = Quiz.find(params[:id])
+      @quiz ||= Quiz.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
