@@ -4,9 +4,8 @@ class Quiz < ApplicationRecord
   belongs_to :user
   validates :name, presence: true, uniqueness: true
   validates :notes, presence: true
-  validates :questions, presence: true
-  validates :difficulty, inclusion: {
-    in: DIFFICULTY,
-    message: "must be between 1 and 5"
-  }
+
+  def average_difficulty
+    self.notes.average(:difficulty).to_i
+  end
 end

@@ -9,6 +9,16 @@ RSpec.describe Quiz, type: :model do
         quiz.notes << note
         expect { quiz.save }.to change { Quiz.count }.by(1)
       end
+      it 'calculates difficulty based on Note difficulty' do
+       easy_note = create(:note, term: 'easy term', difficulty: 1) 
+       medium_note = create(:note, term: 'medium term', difficulty: 3) 
+       hard_note = create(:note, term: 'hard term', difficulty: 5)
+       quiz.notes << easy_note 
+       quiz.notes << medium_note 
+       quiz.notes << hard_note
+       quiz.save
+       expect(quiz.average_difficulty).to eq(3) 
+      end
     end
     context 'when given invalid attributes' do
       it 'is invalid without a name' do
@@ -35,24 +45,6 @@ RSpec.describe Quiz, type: :model do
         quiz.notes << note
         quiz.save
         expect(quiz.errors.full_messages).to include('User must exist')
-      end
-      it 'is invalid when there is not a difficulty' do
-        quiz = build(:quiz, difficulty: nil)
-        quiz.notes << note
-        quiz.save
-        expect(quiz.errors.full_messages).to include('Difficulty must be between 1 and 5')
-      end
-      it 'is invalid when the difficulty is not between 1 and 5' do
-        low_quiz = build(:quiz, difficulty: 0)
-        high_quiz = build(:quiz, difficulty: 6)
-        low_quiz.notes << note
-        high_quiz.notes << note
-        low_quiz.save
-        high_quiz.save
-        expect(low_quiz).to_not be_valid
-        expect(low_quiz.errors.full_messages).to include('Difficulty must be between 1 and 5')
-        expect(high_quiz).to_not be_valid
-        expect(high_quiz.errors.full_messages).to include('Difficulty must be between 1 and 5')
       end
     end
   end
