@@ -43,20 +43,20 @@ RSpec.describe Note, type: :model do
     end
   end
 
-  describe '#search_method_term' do
+  describe '#method_or_term' do
     context 'when given a valid search 'do
       it 'returns the matching "method" or "term" attribute' do
         note = create(:note, method: 'foo')
         another_note = create(:note, term: 'foo')
-        expect(Note.search_method_term('foo')).to include(note, another_note)
+        expect(Note.method_or_term('foo')).to include(note, another_note)
       end
       it 'returns the proper notes with multiple notes' do
         create(:note, method: 'alias')
         create(:note, method: 'all?')
         create(:note, term: 'alias a method')
         random_note = create(:note, term: 'random note')
-        expect(Note.search_method_term('al').count).to eq(3) 
-        expect(Note.search_method_term('al')).to_not include(random_note)
+        expect(Note.method_or_term('al').count).to eq(3) 
+        expect(Note.method_or_term('al')).to_not include(random_note)
       end
     end
     context 'when a match is found' do
@@ -67,8 +67,8 @@ RSpec.describe Note, type: :model do
         note_1.save
         note_2.save
         note_3.save
-        expect(Note.search_method_term("prog")).to include(note_1,note_2)
-        expect(Note.search_method_term("prog")).to_not include(note_3)
+        expect(Note.method_or_term("prog")).to include(note_1,note_2)
+        expect(Note.method_or_term("prog")).to_not include(note_3)
       end
     end
     context 'when a match is not found' do
@@ -79,8 +79,10 @@ RSpec.describe Note, type: :model do
         note_1.save
         note_2.save
         note_3.save
-        expect(Note.search_method_term("random")).to be_empty
+        expect(Note.method_or_term("random")).to be_empty
       end
     end
+  end
+  describe '#language_search' do
   end
 end

@@ -7,7 +7,7 @@ class Note < ApplicationRecord
     in: DIFFICULTY,
     message: "must be between 1 and 5"
   }
-  scope :search_method_term, ->(search_term) {
+  scope :method_or_term, ->(search_term) {
     where("LOWER(method) LIKE ? OR LOWER(term) LIKE ?","%#{search_term.downcase}%", "%#{search_term.downcase}%")
   }
 end
