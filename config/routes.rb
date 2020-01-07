@@ -1,4 +1,4 @@
-Rails.application.routes.draw do                              
+Rails.application.routes.draw do
   resources :users
   # get 'sessions/new'
 
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :quizzes
   resources :notes
-  
+
   get 'login', to: 'sessions#new'
   get 'logout', to: 'sessions#destroy'
   get 'signup', to: 'users#new'

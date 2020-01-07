@@ -11,20 +11,20 @@ RSpec.describe Note, type: :model do
         note = create(:note, method: nil, term: 'duck typing')
         expect(note).to be_valid
       end
-      it 'is valid when it has a "difficulty"' do
+      it 'is valid when it has a \'difficulty\'' do
         note = create(:note, difficulty: 1)
         expect(note).to be_valid
       end
 		end
     context 'when given INVALID attributes' do
-      it 'is INVALID when there is not a "method" or "term"' do
+      it 'is INVALID when there is not a \'method\' or \'term\'' do
         note = build(:note, method: nil, term: nil, difficulty: 1)
         note.save
         expect(note).to_not be_valid
         expect(note.errors.full_messages).to include('Method can\'t be blank')
         expect(note.errors.full_messages).to include('Term can\'t be blank')
       end
-      it 'is INVALID when there is not a "difficulty"' do
+      it 'is INVALID when there is not a \'difficulty\'' do
         note = build(:note, difficulty: nil)
         note.save
         expect(note).to_not be_valid
@@ -44,8 +44,8 @@ RSpec.describe Note, type: :model do
   end
 
   describe '#method_or_term' do
-    context 'when given a valid search 'do
-      it 'returns the matching "method" or "term" attribute' do
+    context 'when given a valid search' do
+      it 'returns the matching \'method\' or \'term\' attribute' do
         note = create(:note, method: 'foo')
         another_note = create(:note, term: 'foo')
         expect(Note.method_or_term('foo')).to include(note, another_note)
@@ -61,25 +61,25 @@ RSpec.describe Note, type: :model do
     end
     context 'when a match is found' do
       it 'returns notes that match the search critieria' do
-        note_1 = build(:note, term: "pair programming", difficulty: 1)
-        note_2 = build(:note, term: "mob programming", difficulty: 1)
-        note_3 = build(:note, term: "bike shedding", difficulty: 1)
+        note_1 = build(:note, term: 'pair programming', difficulty: 1)
+        note_2 = build(:note, term: 'mob programming', difficulty: 1)
+        note_3 = build(:note, term: 'bike shedding', difficulty: 1)
         note_1.save
         note_2.save
         note_3.save
-        expect(Note.method_or_term("prog")).to include(note_1,note_2)
-        expect(Note.method_or_term("prog")).to_not include(note_3)
+        expect(Note.method_or_term('prog')).to include(note_1, note_2)
+        expect(Note.method_or_term('prog')).to_not include(note_3)
       end
     end
     context 'when a match is not found' do
       it 'returns an empty response when there is not a match' do
-        note_1 = build(:note, term: "pair programming", difficulty: 1)
-        note_2 = build(:note, term: "mob programming", difficulty: 1)
-        note_3 = build(:note, term: "bike shedding", difficulty: 1)
+        note_1 = build(:note, term: 'pair programming', difficulty: 1)
+        note_2 = build(:note, term: 'mob programming', difficulty: 1)
+        note_3 = build(:note, term: 'bike shedding', difficulty: 1)
         note_1.save
         note_2.save
         note_3.save
-        expect(Note.method_or_term("random")).to be_empty
+        expect(Note.method_or_term('random')).to be_empty
       end
     end
   end

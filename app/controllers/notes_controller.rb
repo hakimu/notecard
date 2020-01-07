@@ -65,25 +65,25 @@ class NotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_note
-      @note = Note.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_note
+    @note = Note.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def note_params
-      params.require(:note).permit(:method, :term, :code_sample, :definition, :language, :concept, :difficulty)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def note_params
+    params.require(:note).permit(:method, :term, :code_sample, :definition, :language, :concept, :difficulty)
+  end
 
-    def confirm_login
+  def confirm_login
     unless current_user
-      redirect_to root_path, alert: "You must log in to manage a to do list."
+      redirect_to root_path, alert: 'You must log in to see notes.'
     end
+  end
 
-    def confirm_owner
-      if @note && current_user != @note.user
-        redirect_to notes_path, alert: "You don't have permission to access that note."
-      end
+  def confirm_owner
+    if @note && current_user != @note.user
+      redirect_to notes_path, alert: 'You don\'t have permission to access that note.'
     end
   end
 end
