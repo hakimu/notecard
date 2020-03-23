@@ -1,0 +1,10 @@
+<h2>Quiz</h2>
+<p>name: <%= @quiz.name %></p> 
+<p>number of notes: <%= @quiz.notes.count %></p> 
+<% @quiz.notes.each do |note| %>
+  <% notes_in_quizzes_attributes(note).each do |attribute| %>
+    <% if note.send(attribute).present? %>
+      <li><%= attribute %>: <%= note.send(attribute) %></li>
+    <% end %>
+  <% end %>
+<% end %>

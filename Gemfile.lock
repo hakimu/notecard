@@ -139,6 +139,9 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rb-readline (0.5.5)
+    responders (3.0.0)
+      actionpack (>= 5.0)
+      railties (>= 5.0)
     rspec-core (3.8.2)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.4)
@@ -236,6 +239,7 @@ DEPENDENCIES
   rails (~> 5.1.6.2)
   rails-html-sanitizer (>= 1.0.4)
   rb-readline
+  responders
   rspec-rails
   rubyzip (>= 1.2.2)
   sass-rails (~> 5.0)

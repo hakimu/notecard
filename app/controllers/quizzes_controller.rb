@@ -11,7 +11,12 @@ class QuizzesController < ApplicationController
   # GET /quizzes/1.json
   def show
     response = QuizFormatter.new(params[:id]).call 
-    render json: response
+    quizzes = current_user.quizzes
+    @quiz = quizzes.find(params[:id])
+    respond_to do |format|
+      format.html { @quiz }
+      format.json { render json: response }
+    end
   end
 
   # GET /quizzes/new

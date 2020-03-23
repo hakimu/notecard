@@ -46,6 +46,8 @@ gem 'awesome_print', require:"ap"
 # gem 'newrelic_rpm', :path => "/Users/hakimu/Documents/apps/rails_notecard/notecard/newrelic_rpm-4.6.0.338"
 gem 'newrelic_rpm'
 
+gem 'responders'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

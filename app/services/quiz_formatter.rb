@@ -6,7 +6,7 @@ class QuizFormatter
   end
 
   def call
-    quiz + notes 
+    quiz + notes
   end
 
   private
