@@ -1,5 +1,6 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_login
 
   # GET /quizzes
   # GET /quizzes.json
@@ -69,14 +70,22 @@ class QuizzesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_quiz
-      @quiz ||= Quiz.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_quiz
+    @quiz ||= Quiz.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { error: e.message }, status: 404
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def quiz_params
-      params.require(:quiz).permit(:name)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def quiz_params
+    params.require(:quiz).permit(:name)
+  end
+
+  def confirm_login
+    unless current_user
+      redirect_to root_path, alert: 'You must be logged in'
     end
+  end
 end
 

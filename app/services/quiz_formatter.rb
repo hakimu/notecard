@@ -1,12 +1,10 @@
-require 'json'
-
 class QuizFormatter
   def initialize(quiz_id)
     @quiz_id = quiz_id
   end
 
   def call
-    quiz + notes
+    { quiz: quiz, notes: notes }
   end
 
   private
