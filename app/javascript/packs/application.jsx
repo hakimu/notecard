@@ -8,4 +8,9 @@
 // layout file, like app/views/layouts/application.html.erb
 import "./application.css";
 import "bootstrap/dist/css/bootstrap.css"
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Home from '../components/Home';
+
+ReactDOM.render(<Home />, document.getElementById('root'));
 console.log('Hello World from Webpacker')
